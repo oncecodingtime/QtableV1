@@ -5,6 +5,7 @@ from time import time
 from time import sleep
 from datetime import datetime
 import matplotlib.pyplot as plt
+import pandas as pd
 from rclpy.node import Node
 from std_srvs.srv import Empty
 from std_srvs.srv._empty import Empty_Request
@@ -55,9 +56,11 @@ RANDOM_INIT_POS = False
 LOG_FILE_DIR = DATA_PATH + '/Log_learning_CUSTOM'
 
 # Q table source file
-Q_SOURCE_DIR = ''
+Q_SOURCE_DIR = '/mnt/c/Users/keera/Documents/Github/Basic_robot/QtableV1/Data/Log_learning/Qtable.csv'
+# change to True to use existing q table
+USE_EXIST_Q = False
 
-RADIUS_REDUCE_RATE = .5
+RADIUS_REDUCE_RATE = .1
 REWARD_THRESHOLD =  -200.0
 CUMULATIVE_REWARD = 0.0
 
@@ -78,7 +81,13 @@ class LearningNode(Node):
         self.state_space = createStateSpace()
         print('state_space shape')
         print(self.state_space.shape)
-        self.Q_table = createQTable(len(self.state_space), len(self.actions))
+
+        if USE_EXIST_Q: 
+            self.Q_table = pd.read_csv(Q_SOURCE_DIR, header=None)
+            self.Q_table = self.Q_table.to_numpy()
+        else:
+            self.Q_table = createQTable(len(self.state_space), len(self.actions))
+
         print('Initial Q-table:')
         print(self.Q_table.shape, self.Q_table)
         # Init log files
