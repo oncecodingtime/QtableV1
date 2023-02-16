@@ -25,7 +25,7 @@ from rclpy.signals import SignalHandlerGuardCondition
 from rclpy.utilities import timeout_sec_to_nsec
 
 # Episode parameters
-MAX_EPISODES = 10
+MAX_EPISODES = 500
 MAX_STEPS_PER_EPISODE = 500
 MIN_TIME_BETWEEN_ACTIONS = 0.0
 MAX_EPISODES_BEFORE_SAVE = 5
@@ -56,9 +56,9 @@ RANDOM_INIT_POS = False
 LOG_FILE_DIR = DATA_PATH + '/Log_learning_CUSTOM'
 
 # Q table source file
-Q_SOURCE_DIR = '/mnt/c/Users/keera/Documents/Github/Basic_robot/QtableV1/Data/Log_learning/Qtable.csv'
+Q_SOURCE_DIR = '/mnt/c/Users/keera/Documents/Github/Basic_robot/QtableV1/Data/Log_learning_CUSTOM/Qtable.csv'
 # change to True to use existing q table
-USE_EXIST_Q = False
+USE_EXIST_Q = True
 
 RADIUS_REDUCE_RATE = .1
 REWARD_THRESHOLD =  -200.0
@@ -279,9 +279,10 @@ class LearningNode(Node):
                 self.log_sim_params.close()
                 raise SystemExit
             else:
+
                 ep_time = (self.get_clock().now() - self.t_ep).nanoseconds / 1e9
                 # End of en Episode
-                
+                print("Episode: ", self.episode)
                 if self.CUMULATIVE_REWARD < REWARD_THRESHOLD or self.terminal_state:
                     robotStop(self.velPub)
                     # if self.crash:

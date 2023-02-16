@@ -1,5 +1,0 @@
---------------------------------------- 
-
-MAX EPISODES REACHED(10), LEARNING FINISHED
-Simulation time: 0:10:11  h/m/s 
-
