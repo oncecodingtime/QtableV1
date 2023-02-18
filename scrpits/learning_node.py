@@ -10,8 +10,8 @@ from std_srvs.srv import Empty
 import pandas as pd
 from std_srvs.srv._empty import Empty_Request
 import sys
-DATA_PATH = 'ros2/ros2_ql/Qtable/QtableV1/Data'
-MODULES_PATH = 'ros2/ros2_ql/Qtable/QtableV1/scrpits'
+DATA_PATH = '/mnt/c/Users/keera/Documents/Github/Basic_robot/QtableV1/Data'
+MODULES_PATH = '/mnt/c/Users/keera/Documents/Github/Basic_robot/QtableV1/scrpits'
 
 sys.path.insert(0, MODULES_PATH)
 from gazebo_msgs.msg._model_state import ModelState
@@ -69,6 +69,10 @@ CUMULATIVE_REWARD = 0.0
 
 GOAL_POSITION = (.03, 1.9777, .0)
 GOAL_RADIUS = .06
+
+
+def str2bool(v):
+    return v.lower() in ("yes", "true", "t", "1")
 
 parser = argparse.ArgumentParser(description='Qtable V1')
 # Log file directory
