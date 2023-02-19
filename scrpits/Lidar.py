@@ -52,7 +52,6 @@ def scanDiscretization(state_space, lidar, target_pos, robot_pose, robot_prev_po
     x6 = 2 
     x7 = 1
     x8 = 1
-    
     x9 = 2
     x10 = 2
     
